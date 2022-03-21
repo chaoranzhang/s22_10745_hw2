@@ -39,7 +39,7 @@ def upload_data(**kwargs):
     global flann_linear
     global flann_kdtree
     global mydata_loaded
-    
+    print("Start to receive data")
     json_dump=kwargs['json_dump']
     json_load = json.loads(json_dump)
     mydata_loaded = np.asarray(json_load["mydata"])

@@ -125,8 +125,8 @@ def imagesearch_tasks(**kwargs):
     min5 = 999999999999999999999999999999
     min5_res = []
     for feature in mydata_loaded:
-        feature = feature["features"]
-        print(feature.shape)
+#         feature = feature["features"]
+        print(feature)
         print(query_feature.shape)
         dis = dist(feature, query_feature, 0)
         if len(min5_res) < 5:

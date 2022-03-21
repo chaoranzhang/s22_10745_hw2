@@ -119,6 +119,24 @@ def imagesearch_tasks(**kwargs):
     results.append([linear_paths, linear_time])
     results.append([kdtree_paths, kdtree_time])
     print("end query")
+    
+    # Naive
+    t1 = time.time()
+    min5 = 999999999999999999999999999999
+    min5_res = []
+    for feature in mydata_loaded:
+        feature = feature["features"]
+        dis = dist(feature, query_feature)
+        if len(min5_res) < 5:
+            min5_res.append(dis)
+        else:
+            min5 = max(min5_res)
+            if dis < min5:
+                min5.sort()
+                k = min5.pop(-1)
+                min5.append(dis)
+    t2 = time.time()
+    results.append(t2-t1)
   
     return json.dumps({'results': results},cls=NumpyEncoder)
 

@@ -112,6 +112,7 @@ def imagesearch_tasks(**kwargs):
     kdtree_time = t2 - t1
     
     results.append([kdtree_result, kdtree_time])
+    print("end query")
   
     return results
 

@@ -114,7 +114,7 @@ def imagesearch_tasks(**kwargs):
     results.append([kdtree_result, kdtree_time])
     print("end query")
   
-    return results
+    return json.dumps({'results': results},cls=NumpyEncoder)
 
 # Euclidean Distance Caculator
 def dist(a, b, ax=1):
@@ -127,5 +127,4 @@ class NumpyEncoder(json.JSONEncoder):
         elif isinstance(obj, np.int64): 
             return int(obj)
         return json.JSONEncoder.default(self, obj)
-
 

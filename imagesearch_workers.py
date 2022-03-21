@@ -130,6 +130,7 @@ def imagesearch_tasks(**kwargs):
         feature = np.array(feature)
 #         print(query_feature.shape)
         dis = dist(feature, query_feature, 0)
+        print(dis)
         if len(min5_res) < 5:
             min5_res.append(dis)
         else:

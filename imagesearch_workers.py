@@ -84,11 +84,16 @@ def imagesearch_tasks(**kwargs):
     num_results=5
     
     json_dump=kwargs['json_dump']
-    json_load = json.loads(json_dump)
     
+    print("1")
+    json_load = json.loads(json_dump)
+    print("1")
+
     query_feature = np.asarray(json_load["query_feature"])
+    print("1")
     
     results=[]
+    print("1")
     
     # ****************************************
     #    *** you will need to complete this part ***

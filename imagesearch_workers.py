@@ -113,8 +113,8 @@ def imagesearch_tasks(**kwargs):
     
 #     results.append([kdtree_result, kdtree_time])
     
-    linear_paths = [mydata_loaded[idx]['path'] for idx in linear_result]
-    kdtree_paths = [mydata_loaded[idx]['path'] for idx in kdtree_result]
+    linear_paths = [mydata_loaded[idx]['path'] for idx in linear_result[0]]
+    kdtree_paths = [mydata_loaded[idx]['path'] for idx in kdtree_result[0]]
     
     results.append([linear_paths, linear_time])
     results.append([kdtree_paths, kdtree_time])

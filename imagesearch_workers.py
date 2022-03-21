@@ -126,7 +126,7 @@ def imagesearch_tasks(**kwargs):
     min5_res = []
     for feature in mydata_loaded:
         feature = feature["features"]
-        dis = dist(feature, query_feature)
+        dis = dist(feature, query_feature, 0)
         if len(min5_res) < 5:
             min5_res.append(dis)
         else:

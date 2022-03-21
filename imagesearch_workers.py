@@ -10,6 +10,7 @@ import celery
 import numpy as np
 from copy import deepcopy
 import json
+import pyflann
 from pyflann import * # I use pyflann data structure. You any that you like
 import time
 from scipy.spatial import distance
@@ -32,6 +33,7 @@ mydata_loaded =[]
  
 @app.task
 def upload_data(**kwargs):
+    print("in upload_data")
     global upload_nums
     global params_kdtree
     global params_linear
@@ -59,6 +61,12 @@ def upload_data(**kwargs):
     # Create a near neighbour data structure here from the feature_train feature vectors!
     # ********************************************
     
+    pyflann.set_distance_type("euclidean")
+    
+    params_kdtree = flann_kdtree.build_index(features_train, algorithm = "kdtree", trees = 4)
+    params_linear = flann_linear.build_index(features_train, algorithm = "linear")
+    
+    print("dataset built")
     return
 
 @app.task
@@ -70,6 +78,8 @@ def imagesearch_tasks(**kwargs):
     global flann_linear
     global flann_kdtree
     global mydata_loaded
+    
+    print("start query")
     
     num_results=5
     
@@ -85,7 +95,19 @@ def imagesearch_tasks(**kwargs):
     # Find k nearest neighbours that are closest to your query vector
     # ********************************************
     
+    t1 = time.time()
+    linear_result, dists = flann_linear.nn_index(query_feature, 5, checks = params_linear['checks'])
+    t2 = time.time()
+    linear_time = t2 - t1
+    results.append([linear_result, linear_time])
     
+    t1 = time.time()
+    kdtree_result, dists = flann_kdtree.nn_index(query_feature, 5, checks = params_kdtree["checks"])
+    t2 = time.time()
+    kdtree_time = t2 - t1
+    
+    results.append([kdtree_result, kdtree_time])
+  
     return results
 
 # Euclidean Distance Caculator

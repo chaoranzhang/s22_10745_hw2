@@ -17,8 +17,8 @@ from scipy.spatial import distance
 # change this to your load balancers!!!
 
 app = celery.Celery('imagesearch_workers',
-                        broker='amqp://myguest:myguestpwd@PROD-JOB-844fd7d2202ac4da.elb.us-east-2.amazonaws.com',
-                        backend='amqp://myguest:myguestpwd@PROD-JOB-844fd7d2202ac4da.elb.us-east-2.amazonaws.com')
+                        broker='amqp://myguest:myguestpwd@10745-hw1-78ed39ec05bd3e11.elb.us-east-2.amazonaws.com',
+                        backend='amqp://myguest:myguestpwd@10745-hw1-78ed39ec05bd3e11.elb.us-east-2.amazonaws.com')
 
 #Global variables
 #Use any global variables that you will need

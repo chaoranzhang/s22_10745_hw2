@@ -136,9 +136,9 @@ def imagesearch_tasks(**kwargs):
         else:
             min5 = max(min5_res)
             if dis < min5:
-                min5.sort()
-                k = min5.pop(-1)
-                min5.append(dis)
+                min5_res.sort()
+                k = min5_res.pop(-1)
+                min5_res.append(dis)
     t2 = time.time()
     results.append(t2-t1)
   

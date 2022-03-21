@@ -104,14 +104,20 @@ def imagesearch_tasks(**kwargs):
     linear_result, dists = flann_linear.nn_index(query_feature, 5, checks = params_linear['checks'])
     t2 = time.time()
     linear_time = t2 - t1
-    results.append([linear_result, linear_time])
+#     results.append([linear_result, linear_time])
     
     t1 = time.time()
     kdtree_result, dists = flann_kdtree.nn_index(query_feature, 5, checks = params_kdtree["checks"])
     t2 = time.time()
     kdtree_time = t2 - t1
     
-    results.append([kdtree_result, kdtree_time])
+#     results.append([kdtree_result, kdtree_time])
+    
+    linear_paths = [mydata_loaded[idx]['path'] for idx in linear_result]
+    kdtree_paths = [mydata_loaded[idx]['path'] for idx in kdtree_result]
+    
+    results.append([linear_paths, linear_time])
+    results.append([kdtree_paths, kdtree_time])
     print("end query")
   
     return json.dumps({'results': results},cls=NumpyEncoder)
